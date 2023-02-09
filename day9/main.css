@@ -1,0 +1,35 @@
+.grey {
+  background-color: lightgrey;
+  height: 2000px;
+  margin-top: 500px;
+}
+.image {
+  float: right;
+  width: 400px;
+  position: sticky;
+  top: 100px;
+}
+.text {
+  float: left;
+  width: 300px;
+}
+
+.card-background {
+  height: 3000px;
+  margin-top: 800px;
+  margin-bottom: 1600px;
+}
+
+.card-box img {
+  /*가운데 정렬*/
+  display: block;
+  margin: auto;
+  max-width: 80%;
+}
+
+.card-box {
+  position: sticky;
+  top: 400px; /*viewport 상단에서 400 정도 내려왔을때 고정되게 해쥬셈*/
+  margin-top: 200px;
+  transition: all 0.2s; /*더 부드럽*/
+}

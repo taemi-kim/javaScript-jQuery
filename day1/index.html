@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="alert-box" id="alert">
+        <p id="message">알림창임</p>
+        <button onclick="Popup('none')">Close</button></div>
+
+    <button onclick="infoModal('아이디 입력')">버튼1</button> <!--아이디입력-->
+    <button onclick="infoModal('비번 입력')">버튼2</button> <!--비번입력-->
+    
+    <script>
+        function infoModal(text){
+            document.getElementById('message').innerHTML=text;
+            document.getElementById('alert').style.display = 'block';
+        }
+        function Popup(구멍){
+            document.getElementById('alert').style.display=구멍;
+        }
+    </script>
+</body>
+</html>

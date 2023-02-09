@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //변수 선언, 할당, 범위
+        //var의 범위: function 안
+        var 이름; //선언 undefined 
+        이름 = 'taem'; //할당
+        var 이름 = 'taem'; //선언 & 할당
+        //함수 안에 정의된 변수는 밖에서 쓸 수 없음
+
+        //let은 재선언 불가
+        //let 범위: {} 
+        let 이름 = 'kim';
+        let 이름 = 'park'; //(x) 변수 또 만들어서 버그 생기는 거 방지
+
+        //const는 재선언, 재할당 불가
+         //const 범위: {} 
+        const 이름 = 'kim';
+        이름 = 'park'; //(x) 절대 바뀌면 안되는 값
+
+
+        //ifElse
+        //Q1&2. 철수 바보 삼육구도 모르냐
+        function 삼육구게임(num){
+            if(num%3==0){
+                if(num%9==0){
+                    console.log('박수x2');
+                }else{
+                    console.log('박수');
+                }
+                
+            }else{
+                console.log('통과');
+            }
+        }
+        //Q3. 공인중개사 시험 합격은 에듀윌
+        function 합격했냐(gaeron, minbup){
+            if(gaeron>100 || minbup>100){
+                alert('장난치지마라')  
+            }
+            else{
+                if(gaeron>40 && minbup>40){
+                    if(gaeron+minbup >= 120){
+                        console.log('합격')
+                    }else{
+                        console.log('불합격')
+                    }
+                }else{
+                    console.log('불합격');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

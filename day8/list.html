@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="detail.css" rel="stylesheet">
+</head>
+<body>
+    <!--bootstrap css-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-sm-4">
+              <img src="https://via.placeholder.com/600" class="w-100">
+              <h5>Card title</h5>
+              <p>가격 : 70000</p>
+            </div> -->
+      
+        </div>
+    </div> 
+
+    <div class="container my-3">
+        <button class="btn btn-danger" id="price">가격순</button>
+    </div>
+    <div class="container my-3">
+        <button class="btn btn-danger" id="alphabet">다나가순</button>
+    </div>
+    <div class="container my-3">
+        <button class="btn btn-danger" id="six">6만원 이하만</button>
+    </div>
+    <div class="container">
+        <button class="btn btn-danger" id="extra">더보기</button>
+    </div>
+
+    
+<script>
+    //localStorage()
+    //구매버튼 누르면 장바구니행
+    //**** 디버깅 문제 : js로 html 설정한 버튼들만 'click'이 먹지 않음 
+    //응용 1. 같은 상품은 중복으로 추가되지 않게 하고 싶으면?
+    //응용 2. 같은 상품 구매 누르면 상품 갯수가 올라가게? ex) [{title:'상품명a', num:2}]
+    $('.w-100').on('click', function(e){
+        var title = $(e.target).siblings('h5').text(); //e.target.previousElementSibling.previousElementSibligng
+        
+        if (localStorage.getItem('cart') != null){ //항목이 이미 있을 때 수정!
+            //수정하는 방법
+            //localStorage에 있던 array 1)꺼내서 2)자료추가 3)다시넣기
+            var temp = JSON.parse(localStorage.getItem('cart')); //localStorage.cart;
+            temp.push(title); //자료추가 
+            localStorage.setItem('cart', JSON.stringify(temp)); //다시넣기
+        }
+        else{ //항목이 없으면 새로 만들도록
+            localStorage.setItem('cart', JSON.stringify([title]));
+            
+        }
+
+    });
+    
+    /*
+    localStorage.getItem('이름');
+    localStorage.removeItem('이름');*/
+
+    //array or object도 저장하는 편법 --> JSON으로 바꾸기
+    var arr = [1,2,3];
+    var newArr = JSON.stringify(arr);
+    localStorage.setItem('num', newArr);
+    temp = localStorage.getItem('num'); //JSON, 즉 문자로 다시 뱉어냄
+
+    //array or object 로 다시 바꾸려면
+    JSON.parse(temp);
+
+    //상품명 다나가순 정렬 버튼 
+    var products = [
+        { id : 0, price : 70000, title : 'Blossom Dress' },
+        { id : 1, price : 50000, title : 'Springfield Shirt' },
+        { id : 2, price : 60000, title : 'Black Monastery' }
+    ];
+    $('#alphabet').on('click', function(){
+        products.sort((a,b)=>{
+            if (a.title > b.title){
+                return -1; //a.title이 왼쪽에 있게
+            }
+            else if (a.title < b.title){
+                return 1; //a.title을 우측으로 보내게
+            }
+            else if (a.title == b.title){
+                return 0; //a.title을 우측으로 보내게
+            }
+        });//products.sort().reverse();
+        $('.row').html('');
+        addExtra(products);
+    });
+    //6만원 이하 상품만 보기 버튼
+    $('#six').on('click', function(){
+        var newP = products.filter((a)=>{
+            return a.price <= 60000;
+        }); // var newP = products.filter(a => a.price <= 60000);
+        $('.row').html('');
+        addExtra(newP);
+    }); 
+    //array 자료 정리
+    var 어레이 = [7,3,5,2,40];
+    //자료 전체 변형: .map()
+    var map어레이 = 어레이.map(function(a){
+        return a * 7;
+    });
+    //원하는 자료 필터: .filter()
+    var new어레이 = 어레이.filter(function(a){ //새 변수에 저장해야함
+        return a < 4;
+    });
+    console.log(new어레이);
+
+    //정렬: .sort()
+    //Task: products 안 객체데이터 가격순 정렬
+    var products = [
+        { id : 0, price : 70000, title : 'Blossom Dress' },
+        { id : 1, price : 50000, title : 'Springfield Shirt' },
+        { id : 2, price : 60000, title : 'Black Monastery' }
+    ];
+
+    $('#price').on('click', function(){
+        products.sort((a,b)=>{
+            return a.price - b.price;
+        });
+        $('.row').html('');
+        addExtra(products);
+    });
+    
+    console.log(products);
+
+    //문자 가나다순 : 문자가 뒤로 나올 수록 < 더 큼 
+    var 어레이2 = ['a','c','b']
+    어레이2.sort(); 
+    //역순
+    어레이2.sort().reverse();
+    console.log(어레이2);
+    // var 어레이 = [7,3,5,2,40];
+    // 어레이.sort(); //sort의 default 문자순 정렬
+    // console.log(어레이);
+
+    // 어레이.sort(function(a,b){ //숫자 오름차순 정렬
+    //     return a - b
+    // })
+    // console.log(어레이);
+
+    //Task Ajax 요청 with 응용
+    //더보기로 상품 데이터 서버에서 더 가져오기
+    var count = 0;
+    $('#extra').on('click', function(){
+        count++;
+        if(count==1){
+            $.get('https://codingapple1.github.io/js/more1.json')
+            .done(function(data){
+                var extra = data;
+                addExtra(extra);
+            }).fail(function(){
+                alert('데이터 로드 실패');
+            });
+        }else if(count==2){
+            $.get('https://codingapple1.github.io/js/more2.json')
+            .done(function(data){
+                var extra = data;
+                addExtra(extra);
+            }).fail(function(){
+                alert('데이터 로드 실패');
+            });
+            
+            //더보기 버튼 삭제
+            $('#extra').addClass('btn-hide');
+        }
+        
+    })
+
+    function addExtra(products){
+        products.forEach(function(a, i){
+        var card = `<div class="col-sm-4"> 
+              <img src="https://via.placeholder.com/600" class="w-100">
+              <h5>${products[i].title}</h5>
+              <p>가격 : ${products[i].price}</p>
+              <button class="buy" id="shit">장바구니</button>
+            </div>`
+        $('.row').append(card);
+    });
+    }
+    
+
+    //AJAX
+    //상품가격
+    $.get('https://codingapple1.github.io/price.json')
+    .done(function(data){
+        console.log(data.price);
+    })
+    .fail(function(){
+        console.log('실패함'); 
+    })
+    //GET
+    $.get('https://codingapple1.github.io/hello.txt')
+    .done(function(data){//ajax 코드 성공했을 때 안의 코드 싫행
+        console.log(data);
+    })
+    .fail(function(){
+        console.log('실패함'); //404 주소가 이상하다는 뜻
+    })
+    //POST 이렇게 할 수도 있음 
+    // $.post('https://codingapple1.github.io/hello.txt', {name:'kim'}).done(function(data){//ajax 코드 성공했을 때 안의 코드 싫행
+    //     console.log(data);
+    // })
+
+
+    //서버에서 가져온 데이터라고 가정
+    //Task: products 안 데이터를 3개의 카드에 데이터바인딩
+    //id 어디다 어케 쓰면 되는거징?
+    var products = [
+        { id : 0, price : 70000, title : 'Blossom Dress' },
+        { id : 1, price : 50000, title : 'Springfield Shirt' },
+        { id : 2, price : 60000, title : 'Black Monastery' }
+    ];
+
+    //Task: js로 html 생성
+    //row 라는 div 안에 카드 3개 생성해주세요 
+    //var card = $('.col-sm-4').html();
+    
+    products.forEach(function(a, i){
+        var card = `<div class="col-sm-4"> <!--card1-->
+              <img src="https://via.placeholder.com/600" class="w-100">
+              <h5>${products[i].title}</h5>
+              <p>가격 : ${products[i].price}</p>
+              <button class="buy">장바구니</button>
+            </div>`
+        $('.row').append(card);
+    });
+    
+</script> 
+    </script>
+</body>
+</html>

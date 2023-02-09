@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+    <link href="modal.css" rel="stylesheet">
+</head>
+  <body>
+    <!--모달창 웹사이트-->
+    <button id="login-btn">로그인</button>
+
+    <button type="button" class="btn btn-primary">Primary</button>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand">Navbar</span>
+          <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav> 
+
+      <ul class="list-group" id="test1">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
+
+      <p class="hello">안녕</p>
+      <p class="hello">안녕</p>
+      <p class="hello">안녕</p>
+      <button id="test-btn">버튼</button>
+
+    
+      <div class="modal-overlay">
+        <div class="modal-window">
+            <div class="title">
+                <h2>Login</h2>
+            </div>
+            <div class="close-area">X</div>
+            <div class="content">
+                <p>가나다라마바사 아자차카타파하</p>
+                <p>로그인 할거니?</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.login-btn').addEventListener('click', function(){
+            document.querySelector('.modal-overlay').classList.toggle('show');
+        })
+
+        document.querySelector('.navbar-toggler').addEventListener('click', function(){
+            document.querySelector('.list-group').classList.toggle('show');
+        })
+        /*
+        document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function(){
+            document.getElementsByClassName("list-group")[0].classList.toggle('show'); //toggle! 뗐다 붙혔다
+        })*/
+    </script>
+
+    <!--bootstrap css-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
+    <!--jquery library 작동은 설치된 곳 밑에-->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script>
+        //querySelectorAll() ~ $
+        $('.hello').html('바보');
+        $('.hello').css('color', 'red');
+        $('#test-btn').on('click', function(){
+            $('.hello').slideUp(); //.fadeOut(), 등등 다양한 애니메이션 있음
+            //$('.hello').hide();
+            //$('.hello').toggleClass('show');//.removeClass(), .toggleClass()
+        })
+
+        //모달창
+        $('#login-btn').on('click', function(){
+            $('#modal').fadeIn();
+        })
+    </script>
+  </body>
+</html>

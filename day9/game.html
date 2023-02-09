@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+
+    <div id="quiz">
+        <h4>물에 빠지면 누구부터 구할 거임?</h4>
+        <button>와이프</button>
+        <button>부모님</button>
+        <button>멍멍</button>
+    </div>
+
+    <script>
+        $('#quiz').click(function(e){
+            //실제 누른 버튼
+            switch(e.target.innerHTML){
+                case "와이프":
+                    alert("와이프 좋아하시네요");
+                    break;
+                case "부모님":
+                    alert("효돌이시네요");
+                    break;
+                case "멍멍":
+                    alert("마보미");
+                    break;
+                default:
+                    alert("읭");
+            }
+        })
+    </script>
+</body>
+</html>
